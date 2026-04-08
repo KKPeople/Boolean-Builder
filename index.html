@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KK People Boolean Builder</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* Custom Scrollbar for Output Box */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Tag Input Container Focus Style */
+        .tag-container-focus {
+            border-color: #2563eb !important;
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.05) !important;
+        }
+        .tag-input-focus {
+            border-color: #2563eb !important;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="min-h-screen py-10 px-4 md:px-8 flex justify-center">
+        
+        <!-- Main Form Page Container -->
+        <div class="w-full max-w-[1100px] bg-white p-6 md:p-12 rounded-2xl shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),_0_10px_10px_-5px_rgba(0,0,0,0.04)] border border-white/50 flex flex-col mb-16">
+          
+            <!-- Header Image Space -->
+            <div class="w-full mb-10 rounded-xl overflow-hidden border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center min-h-[120px] relative">
+                <img src="header.png" alt="Header" class="w-full h-auto object-cover absolute inset-0 z-10" onerror="this.style.display='none'">
+                <span class="text-slate-400 font-medium z-0 tracking-wide text-sm">Header Space (Add header.png)</span>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="text-center text-[26px] md:text-[32px] font-extrabold text-blue-600 uppercase tracking-tight relative pb-5 mb-10">
+                KK People Boolean Builder
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-[5px] bg-gradient-to-r from-blue-600 to-blue-800 rounded-full"></span>
+            </h1>
+
+            <!-- Type Selection (Choice Group Style) -->
+            <div class="flex flex-col items-center justify-center mb-10">
+                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest mb-3">
+                    Search Type
+                </span>
+                <div class="flex items-center gap-4 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                    
+                    <!-- General Toggle -->
+                    <label id="mode-general" class="flex items-center gap-3 px-6 py-2.5 rounded-lg cursor-pointer transition-all select-none bg-white shadow-sm border border-slate-200" onclick="setMode('General')">
+                        <div id="mode-general-dot" class="w-[50px] h-[24px] rounded-full border-2 transition-colors relative flex items-center p-1 bg-blue-600 border-blue-600 shadow-[inset_0_0_0_3px_#fff]"></div>
+                        <span class="font-semibold text-[15px] flex items-center gap-2">
+                            <i data-lucide="globe" id="mode-general-icon" class="w-[18px] h-[18px] text-blue-600"></i>
+                            General
+                        </span>
+                    </label>
+
+                    <!-- XRay Toggle -->
+                    <label id="mode-xray" class="flex items-center gap-3 px-6 py-2.5 rounded-lg cursor-pointer transition-all select-none hover:bg-slate-100 border border-transparent" onclick="setMode('XRay')">
+                        <div id="mode-xray-dot" class="w-[50px] h-[24px] rounded-full border-2 transition-colors relative flex items-center p-1 bg-white border-slate-300"></div>
+                        <span class="font-semibold text-[15px] flex items-center gap-2">
+                            <i data-lucide="linkedin" id="mode-xray-icon" class="w-[18px] h-[18px] text-slate-400"></i>
+                            LinkedIn X-Ray
+                        </span>
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                
+                <!-- LEFT COLUMN: CRITERIA -->
+                <div class="lg:col-span-7 xl:col-span-8">
+                  
+                    <!-- Section Header -->
+                    <h2 class="text-[14px] font-bold text-white bg-gradient-to-br from-blue-600 to-blue-800 px-5 py-3 rounded-lg uppercase tracking-wider shadow-sm inline-block mb-6">
+                        1. Role Details & Logistics
+                    </h2>
+
+                    <!-- Inputs Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                        <!-- Job Titles -->
+                        <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
+                            <label class="flex items-center justify-between mb-3">
+                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="briefcase" class="w-4 h-4 text-slate-400"></i> Job Titles
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                            </label>
+                            <div id="tags-jobTitles" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
+                            <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
+                                <input type="text" data-category="jobTitles" data-placeholder="e.g. Developer" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
+                            </div>
+                        </div>
+
+                        <!-- Locations -->
+                        <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
+                            <label class="flex items-center justify-between mb-3">
+                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-slate-400"></i> Locations
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                            </label>
+                            <div id="tags-locations" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
+                            <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
+                                <input type="text" data-category="locations" data-placeholder="e.g. London, 415" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                        <!-- Must Have Skills -->
+                        <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
+                            <label class="flex items-center justify-between mb-3">
+                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="code" class="w-4 h-4 text-slate-400"></i> Must-Have Skills
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">AND</span>
+                            </label>
+                            <div id="tags-mustHaves" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
+                            <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
+                                <input type="text" data-category="mustHaves" data-placeholder="Deal Breakers (e.g. Java)" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
+                            </div>
+                        </div>
+
+                        <!-- Nice to Have Skills -->
+                        <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
+                            <label class="flex items-center justify-between mb-3">
+                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="target" class="w-4 h-4 text-slate-400"></i> Teachable Skills
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                            </label>
+                            <div id="tags-niceHaves" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
+                            <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
+                                <input type="text" data-category="niceHaves" data-placeholder="Nice-to-Haves (e.g. AWS)" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                        <!-- Target Companies -->
+                        <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
+                            <label class="flex items-center justify-between mb-3">
+                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="building" class="w-4 h-4 text-slate-400"></i> Target Companies
+                                </span>
+                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                            </label>
+                            <div id="tags-companies" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
+                            <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
+                                <input type="text" data-category="companies" data-placeholder="e.g. Microsoft" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
+                            </div>
+                        </div>
+
+                        <!-- Anti-Persona -->
+                        <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
+                            <label class="flex items-center justify-between mb-3">
+                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                    <i data-lucide="ban" class="w-4 h-4 text-slate-400"></i> Anti-Persona
+                                </span>
+                                <span id="operator-exclude" class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">NOT</span>
+                            </label>
+                            <div id="tags-exclude" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
+                            <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
+                                <input type="text" data-category="exclude" data-placeholder="Exclude (e.g. Junior)" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: OUTPUT -->
+                <div class="lg:col-span-5 xl:col-span-4 flex flex-col h-full">
+                  
+                    <h2 class="text-[14px] font-bold text-white bg-gradient-to-br from-blue-600 to-blue-800 px-5 py-3 rounded-lg uppercase tracking-wider shadow-sm inline-block mb-6 lg:mt-0 mt-8">
+                        2. Generated Output
+                    </h2>
+
+                    <div class="border-2 border-blue-600 bg-white rounded-[12px] p-6 shadow-sm flex flex-col sticky top-8">
+                    
+                        <div class="font-extrabold text-blue-600 uppercase tracking-wide text-[16px] mb-5 pb-3 border-b-2 border-slate-100 flex items-center justify-between">
+                            Final Search String
+                        </div>
+
+                        <div class="bg-[#f8fafc] border border-slate-200 rounded-lg p-5 min-h-[220px] max-h-[350px] overflow-y-auto custom-scrollbar mb-6 relative">
+                            <p id="output-string" class="font-mono text-[14px] text-blue-800 break-words leading-relaxed select-all hidden"></p>
+                            <p id="output-placeholder" class="font-mono text-sm text-slate-400 text-center mt-16 italic">Awaiting criteria input...</p>
+                        </div>
+
+                        <!-- Warning Box -->
+                        <div id="warning-box" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 flex items-start gap-3 mb-6">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 text-red-500 mt-0.5 shrink-0"></i>
+                            <p class="text-[12px] text-red-700 leading-snug font-medium">
+                                Google restricts searches to 32 words. Your string is very long and might be truncated.
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col gap-4 mt-auto">
+                            <button id="copy-btn" onclick="copyString()" class="w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-slate-200 text-slate-400 cursor-not-allowed">
+                                <i data-lucide="copy" id="copy-icon" class="w-[18px] h-[18px]"></i> 
+                                <span id="copy-text">Copy String</span>
+                            </button>
+
+                            <button id="search-btn" onclick="executeSearch()" class="w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 cursor-not-allowed">
+                                <i data-lucide="search" class="w-[18px] h-[18px]"></i> Execute Search
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Image Space -->
+            <div class="w-full mt-12 rounded-xl overflow-hidden border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center min-h-[100px] relative">
+                <img src="footer.png" alt="Footer" class="w-full h-auto object-cover absolute inset-0 z-10" onerror="this.style.display='none'">
+                <span class="text-slate-400 font-medium z-0 tracking-wide text-sm">Footer Space (Add footer.png)</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Application State
+        const state = {
+            mode: 'General', // 'General', 'XRay'
+            tags: {
+                jobTitles: [],
+                locations: [],
+                mustHaves: [],
+                niceHaves: [],
+                companies: [],
+                exclude: []
+            },
+            generatedString: ''
+        };
+
+        // Theme configurations for tags
+        const themes = {
+            jobTitles: "bg-blue-50 text-blue-700 border-blue-200",
+            locations: "bg-blue-50 text-blue-700 border-blue-200",
+            companies: "bg-blue-50 text-blue-700 border-blue-200",
+            mustHaves: "bg-emerald-50 text-emerald-700 border-emerald-200",
+            niceHaves: "bg-amber-50 text-amber-700 border-amber-200",
+            exclude: "bg-red-50 text-red-700 border-red-200"
+        };
+
+        // SVG Icon for the delete button (inline to avoid re-running lucide parser constantly)
+        const xIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+
+        // Mode Toggling
+        function setMode(newMode) {
+            state.mode = newMode;
+            
+            // Update UI Toggles
+            const genLabel = document.getElementById('mode-general');
+            const genDot = document.getElementById('mode-general-dot');
+            const genIcon = document.getElementById('mode-general-icon');
+            
+            const xrayLabel = document.getElementById('mode-xray');
+            const xrayDot = document.getElementById('mode-xray-dot');
+            const xrayIcon = document.getElementById('mode-xray-icon');
+
+            if (newMode === 'General') {
+                genLabel.className = "flex items-center gap-3 px-6 py-2.5 rounded-lg cursor-pointer transition-all select-none bg-white shadow-sm border border-slate-200";
+                genDot.className = "w-[50px] h-[24px] rounded-full border-2 transition-colors relative flex items-center p-1 bg-blue-600 border-blue-600 shadow-[inset_0_0_0_3px_#fff]";
+                genIcon.classList.replace('text-slate-400', 'text-blue-600');
+
+                xrayLabel.className = "flex items-center gap-3 px-6 py-2.5 rounded-lg cursor-pointer transition-all select-none hover:bg-slate-100 border border-transparent";
+                xrayDot.className = "w-[50px] h-[24px] rounded-full border-2 transition-colors relative flex items-center p-1 bg-white border-slate-300";
+                xrayIcon.classList.replace('text-blue-600', 'text-slate-400');
+                
+                document.getElementById('operator-exclude').textContent = 'NOT';
+            } else {
+                xrayLabel.className = "flex items-center gap-3 px-6 py-2.5 rounded-lg cursor-pointer transition-all select-none bg-white shadow-sm border border-slate-200";
+                xrayDot.className = "w-[50px] h-[24px] rounded-full border-2 transition-colors relative flex items-center p-1 bg-blue-600 border-blue-600 shadow-[inset_0_0_0_3px_#fff]";
+                xrayIcon.classList.replace('text-slate-400', 'text-blue-600');
+
+                genLabel.className = "flex items-center gap-3 px-6 py-2.5 rounded-lg cursor-pointer transition-all select-none hover:bg-slate-100 border border-transparent";
+                genDot.className = "w-[50px] h-[24px] rounded-full border-2 transition-colors relative flex items-center p-1 bg-white border-slate-300";
+                genIcon.classList.replace('text-blue-600', 'text-slate-400');
+                
+                document.getElementById('operator-exclude').textContent = '-';
+            }
+
+            buildString();
+        }
+
+        // Tag Management
+        function addTag(category, value) {
+            const val = value.trim();
+            if (val && !state.tags[category].includes(val)) {
+                state.tags[category].push(val);
+                renderTags(category);
+                buildString();
+            }
+        }
+
+        function removeTag(category, index) {
+            state.tags[category].splice(index, 1);
+            renderTags(category);
+            buildString();
+        }
+
+        function renderTags(category) {
+            const container = document.getElementById(`tags-${category}`);
+            const input = document.querySelector(`input[data-category="${category}"]`);
+            
+            container.innerHTML = '';
+            
+            state.tags[category].forEach((tag, index) => {
+                const span = document.createElement('span');
+                span.className = `flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[13px] font-medium border shadow-sm ${themes[category]}`;
+                
+                span.innerHTML = `
+                    ${tag}
+                    <button onclick="removeTag('${category}', ${index})" class="hover:bg-black/10 rounded-full p-0.5 transition-colors text-current opacity-70 hover:opacity-100">
+                        ${xIconSvg}
+                    </button>
+                `;
+                container.appendChild(span);
+            });
+
+            // Update placeholder based on whether there are tags
+            if (state.tags[category].length > 0) {
+                input.placeholder = "Type and press Enter...";
+            } else {
+                input.placeholder = input.getAttribute('data-placeholder');
+            }
+        }
+
+        // Input Event Listeners
+        document.querySelectorAll('input[data-category]').forEach(input => {
+            const category = input.getAttribute('data-category');
+            const wrapper = input.parentElement;
+            const container = wrapper.parentElement;
+
+            // Handle Focus Styling
+            input.addEventListener('focus', () => {
+                container.classList.add('tag-container-focus');
+                wrapper.classList.add('tag-input-focus');
+            });
+            input.addEventListener('blur', (e) => {
+                container.classList.remove('tag-container-focus');
+                wrapper.classList.remove('tag-input-focus');
+                
+                // Add tag on blur
+                if(e.target.value) {
+                    addTag(category, e.target.value);
+                    e.target.value = '';
+                }
+            });
+
+            // Handle Keydown
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    if(e.target.value) {
+                        addTag(category, e.target.value);
+                        e.target.value = '';
+                    }
+                }
+            });
+        });
+
+        // String Builder Logic
+        function formatTagsForString(tagsArray) {
+            return tagsArray.map(tag => {
+                if (tag.includes(' ') && !tag.startsWith('"') && !tag.endsWith('"')) {
+                    return `"${tag}"`;
+                }
+                return tag;
+            });
+        }
+
+        function buildString() {
+            let parts = [];
+            const andOperator = state.mode === 'General' ? ' AND ' : ' ';
+
+            if (state.mode === 'XRay') {
+                parts.push('site:linkedin.com/in');
+            }
+
+            const titles = formatTagsForString(state.tags.jobTitles);
+            if (titles.length > 0) {
+                if (titles.length === 1) parts.push(titles[0]);
+                else parts.push(`(${titles.join(' OR ')})`);
+            }
+
+            const comps = formatTagsForString(state.tags.companies);
+            if (comps.length > 0) {
+                if (comps.length === 1) parts.push(comps[0]);
+                else parts.push(`(${comps.join(' OR ')})`);
+            }
+
+            const mustHaves = formatTagsForString(state.tags.mustHaves);
+            if (mustHaves.length > 0) {
+                parts.push(mustHaves.join(andOperator));
+            }
+
+            const niceHaves = formatTagsForString(state.tags.niceHaves);
+            if (niceHaves.length > 0) {
+                if (niceHaves.length === 1) parts.push(niceHaves[0]);
+                else parts.push(`(${niceHaves.join(' OR ')})`);
+            }
+
+            const locs = formatTagsForString(state.tags.locations);
+            if (locs.length > 0) {
+                if (locs.length === 1) parts.push(locs[0]);
+                else parts.push(`(${locs.join(' OR ')})`);
+            }
+
+            let finalString = parts.join(andOperator);
+
+            let exclusions = formatTagsForString(state.tags.exclude);
+            
+            if (state.mode === 'XRay') {
+                if (!exclusions.includes('recruiter') && !exclusions.includes('"recruiter"')) {
+                    exclusions.push('recruiter');
+                }
+            }
+
+            if (exclusions.length > 0) {
+                if (state.mode === 'XRay') {
+                    const excludeString = exclusions.map(ex => `-${ex}`).join(' ');
+                    finalString = finalString ? `${finalString} ${excludeString}` : excludeString;
+                } else {
+                    const excludeString = exclusions.map(ex => `NOT ${ex}`).join(' ');
+                    finalString = finalString ? `${finalString} ${excludeString}` : excludeString;
+                }
+            }
+
+            if (state.mode === 'XRay' && finalString) {
+                finalString += ' -inurl:(dir|jobs|pulse|groups|company|help)';
+            }
+
+            finalString = finalString.replace(/\s+/g, ' ').trim();
+            state.generatedString = finalString;
+            
+            updateOutputUI();
+        }
+
+        function updateOutputUI() {
+            const strElem = document.getElementById('output-string');
+            const placeholder = document.getElementById('output-placeholder');
+            const copyBtn = document.getElementById('copy-btn');
+            const searchBtn = document.getElementById('search-btn');
+            const warningBox = document.getElementById('warning-box');
+
+            if (state.generatedString) {
+                strElem.textContent = state.generatedString;
+                strElem.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+
+                // Enable buttons
+                copyBtn.disabled = false;
+                copyBtn.className = "w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-slate-800 text-white hover:bg-black shadow-[0_10px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.25)] hover:-translate-y-1";
+                
+                searchBtn.disabled = false;
+                searchBtn.className = "w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-blue-600 text-white hover:bg-blue-700 shadow-[0_10px_25px_rgba(37,99,235,0.3)] hover:shadow-[0_15px_30px_rgba(37,99,235,0.4)] hover:-translate-y-1";
+
+                // Word count warning for XRay
+                const wordCount = state.generatedString.split(/\s+/).length;
+                if (state.mode === 'XRay' && wordCount > 32) {
+                    warningBox.classList.remove('hidden');
+                } else {
+                    warningBox.classList.add('hidden');
+                }
+
+            } else {
+                strElem.textContent = '';
+                strElem.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+                warningBox.classList.add('hidden');
+
+                // Disable buttons
+                copyBtn.disabled = true;
+                copyBtn.className = "w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-slate-200 text-slate-400 cursor-not-allowed";
+                
+                searchBtn.disabled = true;
+                searchBtn.className = "w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-slate-100 text-slate-400 cursor-not-allowed";
+            }
+        }
+
+        // Actions
+        function copyString() {
+            if (!state.generatedString) return;
+            
+            // Clipboard API with fallback
+            navigator.clipboard.writeText(state.generatedString).then(() => {
+                showCopiedState();
+            }).catch(err => {
+                const textArea = document.createElement("textarea");
+                textArea.value = state.generatedString;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopiedState();
+                } catch (e) {
+                    console.error('Copy failed', e);
+                }
+                document.body.removeChild(textArea);
+            });
+        }
+
+        function showCopiedState() {
+            const btn = document.getElementById('copy-btn');
+            const icon = document.getElementById('copy-icon');
+            const text = document.getElementById('copy-text');
+            
+            btn.className = "w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-emerald-500 text-white shadow-[0_10px_25px_rgba(16,185,129,0.3)] transform -translate-y-1";
+            icon.setAttribute('data-lucide', 'check');
+            icon.setAttribute('stroke-width', '3');
+            text.textContent = 'Copied to Clipboard';
+            lucide.createIcons({ icons: { check: icon } });
+
+            setTimeout(() => {
+                if (state.generatedString) {
+                    btn.className = "w-full py-4 rounded-full font-bold text-[15px] flex items-center justify-center gap-2 transition-all bg-slate-800 text-white hover:bg-black shadow-[0_10px_25px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_30px_rgba(0,0,0,0.25)] hover:-translate-y-1";
+                    icon.setAttribute('data-lucide', 'copy');
+                    icon.removeAttribute('stroke-width');
+                    text.textContent = 'Copy String';
+                    lucide.createIcons({ icons: { copy: icon } });
+                }
+            }, 2000);
+        }
+
+        function executeSearch() {
+            if (!state.generatedString) return;
+            const url = `https://www.google.com/search?q=${encodeURIComponent(state.generatedString)}`;
+            window.open(url, '_blank');
+        }
+
+    </script>
+</body>
+</html>
