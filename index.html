@@ -46,9 +46,11 @@
         <div class="w-full max-w-[1100px] bg-white p-6 md:p-12 rounded-2xl shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1),_0_10px_10px_-5px_rgba(0,0,0,0.04)] border border-white/50 flex flex-col mb-16">
           
             <!-- Header Image Space -->
-            <div class="w-full mb-10 rounded-xl overflow-hidden border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center min-h-[120px] relative">
-                <img src="Header.png" alt="Header" class="w-full h-auto object-cover absolute inset-0 z-10" onerror="this.style.display='none'">
-                <span class="text-slate-400 font-medium z-0 tracking-wide text-sm">Header Space (Add Header.png)</span>
+            <div class="w-full mb-10">
+                <img id="header-img" src="Header.png" alt="Header" class="w-full h-auto block rounded-xl shadow-sm" onerror="this.style.display='none'; document.getElementById('header-fallback').style.display='flex';">
+                <div id="header-fallback" style="display: none;" class="w-full rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 items-center justify-center min-h-[120px]">
+                    <span class="text-slate-400 font-medium tracking-wide text-sm">Header Space (Add Header.png)</span>
+                </div>
             </div>
 
             <!-- Main Title -->
@@ -231,9 +233,11 @@
             </div>
 
             <!-- Footer Image Space -->
-            <div class="w-full mt-12 rounded-xl overflow-hidden border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center min-h-[100px] relative">
-                <img src="footer.png" alt="Footer" class="w-full h-auto object-cover absolute inset-0 z-10" onerror="this.style.display='none'">
-                <span class="text-slate-400 font-medium z-0 tracking-wide text-sm">Footer Space (Add footer.png)</span>
+            <div class="w-full mt-12">
+                <img id="footer-img" src="footer.png" alt="Footer" class="w-full h-auto block rounded-xl shadow-sm" onerror="this.style.display='none'; document.getElementById('footer-fallback').style.display='flex';">
+                <div id="footer-fallback" style="display: none;" class="w-full rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 items-center justify-center min-h-[100px]">
+                    <span class="text-slate-400 font-medium tracking-wide text-sm">Footer Space (Add footer.png)</span>
+                </div>
             </div>
 
         </div>
