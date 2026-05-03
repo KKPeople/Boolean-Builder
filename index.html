@@ -101,12 +101,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <!-- Job Titles -->
                         <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
-                            <label class="flex items-center justify-between mb-3">
-                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                                    <i data-lucide="briefcase" class="w-4 h-4 text-slate-400"></i> Job Titles
-                                </span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
-                            </label>
+                            <div class="mb-3">
+                                <label class="flex items-center justify-between mb-1">
+                                    <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                        <i data-lucide="briefcase" class="w-4 h-4 text-slate-400"></i> Job Titles
+                                    </span>
+                                    <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                                </label>
+                                <p class="text-[11px] text-slate-500 leading-snug">Enter alternative job titles (e.g., Software Engineer). Press <b>Enter</b> to add.</p>
+                            </div>
                             <div id="tags-jobTitles" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
                             <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
                                 <input type="text" data-category="jobTitles" data-placeholder="e.g. Developer" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
@@ -115,12 +118,15 @@
 
                         <!-- Locations -->
                         <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
-                            <label class="flex items-center justify-between mb-3">
-                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                                    <i data-lucide="map-pin" class="w-4 h-4 text-slate-400"></i> Locations
-                                </span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
-                            </label>
+                            <div class="mb-3">
+                                <label class="flex items-center justify-between mb-1">
+                                    <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                        <i data-lucide="map-pin" class="w-4 h-4 text-slate-400"></i> Locations
+                                    </span>
+                                    <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                                </label>
+                                <p class="text-[11px] text-slate-500 leading-snug">Enter target cities, regions, or area codes. Press <b>Enter</b> to add.</p>
+                            </div>
                             <div id="tags-locations" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
                             <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
                                 <input type="text" data-category="locations" data-placeholder="e.g. London, 415" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
@@ -131,12 +137,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <!-- Must Have Skills -->
                         <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
-                            <label class="flex items-center justify-between mb-3">
-                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                                    <i data-lucide="code" class="w-4 h-4 text-slate-400"></i> Must-Have Skills
-                                </span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">AND</span>
-                            </label>
+                            <div class="mb-3">
+                                <label class="flex items-center justify-between mb-1">
+                                    <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                        <i data-lucide="code" class="w-4 h-4 text-slate-400"></i> Must-Have Skills
+                                    </span>
+                                    <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">AND</span>
+                                </label>
+                                <p class="text-[11px] text-slate-500 leading-snug">Mandatory keywords. Each tag acts as a strict requirement in your search.</p>
+                            </div>
                             <div id="tags-mustHaves" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
                             <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
                                 <input type="text" data-category="mustHaves" data-placeholder="Deal Breakers (e.g. Java)" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
@@ -145,12 +154,15 @@
 
                         <!-- Nice to Have Skills -->
                         <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
-                            <label class="flex items-center justify-between mb-3">
-                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                                    <i data-lucide="target" class="w-4 h-4 text-slate-400"></i> Teachable Skills
-                                </span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
-                            </label>
+                            <div class="mb-3">
+                                <label class="flex items-center justify-between mb-1">
+                                    <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                        <i data-lucide="target" class="w-4 h-4 text-slate-400"></i> Teachable Skills
+                                    </span>
+                                    <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                                </label>
+                                <p class="text-[11px] text-slate-500 leading-snug">Preferred or alternative skills. These expand your search results.</p>
+                            </div>
                             <div id="tags-niceHaves" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
                             <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
                                 <input type="text" data-category="niceHaves" data-placeholder="Nice-to-Haves (e.g. AWS)" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
@@ -161,12 +173,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                         <!-- Target Companies -->
                         <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
-                            <label class="flex items-center justify-between mb-3">
-                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                                    <i data-lucide="building" class="w-4 h-4 text-slate-400"></i> Target Companies
-                                </span>
-                                <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
-                            </label>
+                            <div class="mb-3">
+                                <label class="flex items-center justify-between mb-1">
+                                    <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                        <i data-lucide="building" class="w-4 h-4 text-slate-400"></i> Target Companies
+                                    </span>
+                                    <span class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">OR</span>
+                                </label>
+                                <p class="text-[11px] text-slate-500 leading-snug">Target current or past employers. Press <b>Enter</b> to add a company.</p>
+                            </div>
                             <div id="tags-companies" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
                             <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
                                 <input type="text" data-category="companies" data-placeholder="e.g. Microsoft" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
@@ -175,12 +190,15 @@
 
                         <!-- Anti-Persona -->
                         <div class="tag-container bg-[#f8fafc] p-5 rounded-xl border border-slate-300 hover:border-slate-400 transition-all h-full flex flex-col">
-                            <label class="flex items-center justify-between mb-3">
-                                <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                                    <i data-lucide="ban" class="w-4 h-4 text-slate-400"></i> Anti-Persona
-                                </span>
-                                <span id="operator-exclude" class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">NOT</span>
-                            </label>
+                            <div class="mb-3">
+                                <label class="flex items-center justify-between mb-1">
+                                    <span class="text-[13px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                        <i data-lucide="ban" class="w-4 h-4 text-slate-400"></i> Anti-Persona
+                                    </span>
+                                    <span id="operator-exclude" class="text-[10px] font-bold uppercase tracking-wider bg-white border border-slate-200 text-slate-400 px-2 py-0.5 rounded-md shadow-sm">NOT</span>
+                                </label>
+                                <p class="text-[11px] text-slate-500 leading-snug">Exclude specific titles, keywords, or companies from your results.</p>
+                            </div>
                             <div id="tags-exclude" class="flex flex-wrap gap-2 mb-2 flex-grow"></div>
                             <div class="tag-input-wrapper flex items-end border-b-2 border-slate-300 transition-colors pt-2">
                                 <input type="text" data-category="exclude" data-placeholder="Exclude (e.g. Junior)" class="w-full bg-transparent border-none outline-none pb-2 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 placeholder:font-normal">
